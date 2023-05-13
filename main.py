@@ -31,11 +31,7 @@ class SyntaxAnalyzer:
             self.ch = "success"
         
     def language(self):
-        if self.ch in string.ascii_lowercase:
-            self.content()
-        elif self.ch == '(':
-            self.content()
-        elif self.ch == '[':
+        if self.ch in string.ascii_lowercase + "([":
             self.content()
 
     def content(self):
@@ -47,17 +43,17 @@ class SyntaxAnalyzer:
             self.expression()
             if self.ch == ')':
                 self.read()
-                self.language()
             else:
                 raise ValueError
+            self.language()
         elif self.ch == '[':
             self.read()
             self.expression()
             if self.ch == ']':
                 self.read()
-                self.language()
             else:
                 raise ValueError
+            self.language()
         else:
             raise ValueError
 
@@ -71,9 +67,9 @@ class SyntaxAnalyzer:
             self.expression()
             if self.ch == ')':
                 self.read()
-                self.language()
             else:
                 raise ValueError
+            self.language()
         else:
             raise ValueError
 
